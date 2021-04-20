@@ -1,8 +1,7 @@
 <div class="header">
-	<div class="logo">
-		<span class="logo-det">НБУ</span>
-		<span> Помощник </span>
-	</div>
+	<div class="logo"></div>
+	<span> b<span class='name-accent'>E</span>tter-<span class='phrase-accent'>student </span></span>
+
 	<!-- <a class="header-link active" href="#">
 		<svg viewBox="-6 0 512 512" fill="currentColor">
 			<path d="M227.7 357.5a15.1 15.1 0 0021.3 0l54-54a15.1 15.1 0 10-21.4-21.3l-43.3 43.2-19.7-19.7a15.1 15.1 0 00-21.4 21.4zm0 0"></path>

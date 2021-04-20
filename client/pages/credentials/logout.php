@@ -9,6 +9,10 @@
 	session_destroy();
 
 	// Redirect to login page
-	header("location: /coursework/login");
+	if($_ENV === 'local') {
+		header("location: /coursework/login");
+	} else {
+		header("location: /login");
+	}
 	exit;
 ?>

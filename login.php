@@ -1,6 +1,8 @@
 <?php
 	// Initialize the session
-	session_start();
+	if(!session_status()) {
+		session_start();
+	}
 
 	// Check if the user is already logged in, if yes then redirect him to welcome page
 	if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
@@ -91,29 +93,36 @@
 	}
 ?>
 
-<div class="wrapper">
-	<h2>Вход</h2>
+<div class="wrapper credentials-page">
 
-	<?php 
-	if(!empty($login_err)) {
-		echo '<div class="alert alert-danger">' . $login_err . '</div>';
-	}
-	?>
 
-	<form method="post">
+	<form method="post" class='activity card'>
+		<div class="logo"></div>
+
+		<h2>Вход</h2>
+
 		<div class="form-group">
-			<label>Факултетен номер</label>
-			<input type="text" name="fNumber" class="form-control <?php echo (!empty($fNumber_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $fNumber; ?>">
+			<input type="text" name="fNumber" placeholder='Факултетен номер' class="form-control <?php echo (!empty($fNumber_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $fNumber; ?>">
 			<span class="invalid-feedback"><?php echo $fNumber_err; ?></span>
 		</div>
+
 		<div class="form-group">
-			<label>Парола</label>
-			<input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+			<input type="password" name="password" placeholder='Парола' class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
 			<span class="invalid-feedback"><?php echo $password_err; ?></span>
 		</div>
+
 		<div class="form-group">
-			<input type="submit" class="btn btn-primary" value="Влез">
+			<input type="submit" class="button login-button" value="Влез">
 		</div>
-		<p>Не сте регистриран? <a href="register"> Създай акаунт тук</a>.</p>
+
+		<?php 
+			if(!empty($login_err)) {
+				echo '<div class="invalid-feedback centered">' . $login_err . '</div>';
+			}
+	?>
+
+		<p class='register-cta'>Ако нямате регистрация? 
+			<a href="register"> Създай акаунт</a>.
+		</p>
 	</form>
 </div>

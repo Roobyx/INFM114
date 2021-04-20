@@ -111,30 +111,38 @@
 	}
 ?>
 
+<div class="wrapper credentials-page">
+	<form method="post" class='activity card'>
+		<div class="logo"></div>
 
-<div class="wrapper">
-	<h2>Регистрация</h2>
-	<p>Попълнете всички полета.</p>
-	<form method="post">
+		<h2>Регистрация</h2>
+		<!-- <p>Попълнете всички полета.</p> -->
+
 		<div class="form-group">
-			<label>Факултетен Номер</label>
-			<input type="text" name="fNumber" class="form-control <?php echo (!empty($fNumber_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $fNumber; ?>">
+			<!-- <label>Факултетен Номер</label> -->
+			<input placeholder='Факултетен Номер*' type="text" name="fNumber" class="form-control <?php echo (!empty($fNumber_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $fNumber; ?>">
 			<span class="invalid-feedback"><?php echo $fNumber_err; ?></span>
-		</div>    
+		</div>
+
 		<div class="form-group">
-			<label>Парола</label>
-			<input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
+			<!-- <label>Парола</label> -->
+			<input placeholder='Нова парола*' type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
 			<span class="invalid-feedback"><?php echo $password_err; ?></span>
 		</div>
+
 		<div class="form-group">
-			<label>Повторение на паролата</label>
-			<input type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>">
+			<!-- <label>Повторение на паролата</label> -->
+			<input placeholder='Повторение на същата паролата*' type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>">
 			<span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
 		</div>
+
 		<div class="form-group">
-			<input type="submit" class="btn btn-primary" value="Submit">
-			<input type="reset" class="btn btn-secondary ml-2" value="Reset">
+			<input type="submit" class="button login-button" value="Завърши">
+			<!-- <input type="reset" class="button login-button secondary" value="Reset"> -->
 		</div>
-		<p><a href="login">Влезте от тук</a> ако вече имате акаунт</p>
+		
+		<p class='register-cta'>
+			<a href="login">Влезте от тук</a> ако вече имате акаунт
+		</p>
 	</form>
 </div>

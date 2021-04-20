@@ -9,7 +9,7 @@
 	global $currentSemester;
 
 
-	if ($_SERVER["REQUEST_METHOD"] == "POST" && !$_SESSION['virgin']) {
+	if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION['virgin']) {
 		if(!empty($_POST["eStudentPass"])) {
 			$post_viewState = '';
 			$post_viewStateGenerator = '';
@@ -164,7 +164,7 @@
 	
 						//Executing the statement
 						if($stmt->execute()) {
-							updateUserSessionVariables($dbLink, 1, $currentSemester);
+							updateUserSessionVariables($dbLink, 0, $currentSemester);
 						} else {
 							// echo "2 Failed" . "<br>";
 						}
@@ -180,14 +180,15 @@
 			echo "Моля въведете парола";
 		}
 	} else {
-		if($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION['virgin']) {
+		if($_SERVER["REQUEST_METHOD"] == "POST" && !$_SESSION['virgin']) {
 			// Reset so he can re-scrape hes eStudent data
-			updateUserSessionVariables($dbLink, 0, $currentSemester);
+			updateUserSessionVariables($dbLink, 1, $currentSemester);
 		}
 	}
 
 	// Store additional info in session
 	function updateUserSessionVariables($dbCon, $inputVirginValue, $semesterValue) {
+		// echo "Setting virgin status to: " . $inputVirginValue;
 		$fNumber = $_SESSION["fNumber"];
 		$newVirginValue = $inputVirginValue;
 		$newSemesterValue = $semesterValue;
@@ -208,19 +209,29 @@
 			$query->bind_param("i", $fNumber);
 
 			if($query->execute()) {
-				$result = $query->get_result();
 
-				if ($result->num_rows) {
-					if ($row = $result->fetch_assoc()) {
-						$_SESSION['virgin'] = $row['virgin'];
-						$_SESSION['latestSemester'] = $row['latestSemester'];
-						// echo "Virgin set Worked. New value: " . $row['virgin'] . "<br>";
+				if($_ENV === 'local') {
+					$result = $query->get_result();
 
+					if ($result->num_rows) {
+						if ($row = $result->fetch_assoc()) {
+							$_SESSION['virgin'] = $row['virgin'];
+							$_SESSION['latestSemester'] = $row['latestSemester'];
+							// echo "Virgin set Worked. New value: " . $row['virgin'] . "<br>";
+
+						} else {
+							// echo "4 Failed" . "<br>";
+						}
+					}
+				} else {
+					$resVirgin;
+					$reslatestSem;
+
+					if ($query->num_rows) {
+						$_SESSION['virgin'] = $query->fetchColumn('virgin');
+						$_SESSION['latestSemester'] = $query->fetchColumn('latestSemester');
 					}
 				}
-			} else {
-				// echo "4 Failed" . "<br>";
-
 			}
 		} else {
 			// echo "3 Failed" . "<br>";
@@ -283,7 +294,7 @@
 					break;
 				
 				default:
-					return null;
+					return 8;
 					break;
 			}
 		} elseif($toType === 'IntToEnShort'){
@@ -378,24 +389,38 @@
 		$query->bind_param("i", $fNumber);
 
 		if($query->execute()) {
-			$result = $query->get_result();
+			if($_ENV === 'local') {
+				$result = $query->get_result();
 
-			if ($result->num_rows) {
-				// Store current schedule in the session
-				$tempSchedule = [];
-
-				while($row = $result->fetch_assoc()) {
+				if ($result->num_rows) {
+					// Store current schedule in the session
+					$tempSchedule = [];
+	
+					while($row = $result->fetch_assoc()) {
+						$tempName = getCourseName($row['signature'], $dbLink);
+						$course = [$row['signature'], $tempName, translateWeekDays($row['dayOfWeek'], 'bg'), $row['week'], $row['timeStart'], $row['timeEnd'], $row['location']];
+						array_push($tempSchedule, $course);
+					}
 					
-					$tempName = getCourseName($row['signature'], $dbLink);
-					$course = [$row['signature'], $tempName, translateWeekDays($row['dayOfWeek'], 'bg'), $row['week'], $row['timeStart'], $row['timeEnd'], $row['location']];
+					$_SESSION['schedule'] = $tempSchedule;
 
-					// echo "setting day: " . translateWeekDays($row['dayOfWeek'], 'bg') . "<br>";
+					// echo "schedule should be set: " . isset($_SESSION['schedule']);
+				}
+			} else {
+				if ($query->num_rows) {
+					$tempSchedule = [];
+
+					$tempName = getCourseName($query->fetchColumn('signature'), $dbLink);
+					$course = [$query->fetchColumn('signature'), 
+								$tempName, translateWeekDays($query->fetchColumn('dayOfWeek'), 'bg'), 
+								$query->fetchColumn('week'), $query->fetchColumn('timeStart'), 
+								$query->fetchColumn('timeEnd'), $query->fetchColumn('location')];
 
 					array_push($tempSchedule, $course);
+					$_SESSION['schedule'] = $tempSchedule;
 
+					// echo "schedule should be set: " . isset($_SESSION['schedule']);
 				}
-				$_SESSION['schedule'] = $tempSchedule;
-
 			}
 		} else {
 			// echo "Failed" . "<br>";
@@ -442,12 +467,11 @@
 				// TODO: Validate
 				$courseAppleEvent = $eventLink->generateICSLink();
 
-				if($row[2] && $type === 'courses') {
+				if($row[4] && $type === 'courses') {
 					$calendarGoogleLink = "<a href='" . $courseGoogleEvent . "' target='_blank' class='table-link'>" . $gCalendarIcon . "</a>";
 					// $calendarAppleLink = "<a href='" . $courseAppleEvent . "' target='_blank' class='table-link'>" . $aCalendarIcon . "</a>";
 					$tStart = "<div class='time'>" . date_create($row[4])->format("H:i") . "</div>";
 					$tEnd = "<div class='time is-wait'>" . date_create($row[5])->format("H:i") . "</div>";
-
 
 					if(translateWeekDays(date('w'), 'bg') === $row[2]) {
 						echo "<tr class='isToday'>";
@@ -476,7 +500,7 @@
 			"; 
 		
 			foreach ($scheduleArray as $key => $row) {
-				if(!$row[2]) {
+				if(!$row[4]) {
 					echo "<tr>";
 						echo "<td>" . $row[0] . " </td>
 							<td> " . $row[1] . " </td>
