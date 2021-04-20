@@ -3,7 +3,8 @@
 	include_once("./vendor/simple_html_dom.php");
 	include "./src/mLib.php";
 
-
+	$isLoading = true;
+	$scrapeError = '';
 	$statusMessage = 'pending';
 	$userHasData = true;
 	global $currentSemester;
@@ -173,11 +174,13 @@
 				}
 			} else {
 				// TODO: Handle if there is nothing returned
-				echo("De nada");
+				// echo("De nada");
+				$scrapeError = "Въведена е грешка парола или технически проблем";
 			}
 
 		} else {
-			echo "Моля въведете парола";
+			$scrapeError = "Моля въведете парола";
+			// echo "Моля въведете парола";
 		}
 	} else {
 		if($_SERVER["REQUEST_METHOD"] == "POST" && !$_SESSION['virgin']) {

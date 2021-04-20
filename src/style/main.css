@@ -1028,7 +1028,7 @@ tr.isToday {
 	text-align: center;
 }
 
-.credentials-page input[type='text'], .credentials-page input[type='password'] {
+ input[type='text'],  input[type='password'] {
 	width: 100%;
 	height: 35px;
 	border-radius: 3px;
@@ -1047,7 +1047,7 @@ tr.isToday {
 	color: #f44336;
 }
 
-.invalid-feedback .centered {
+.centered {
 	text-align: center;
 }
 
@@ -1089,4 +1089,18 @@ tr.isToday {
 
 thead th {
 	opacity: .6;
+}
+
+.integration-modal {
+	width: 30vw !important;
+	margin-left: -15vw !important;
+}
+
+.integration-modal button {
+	margin: 10px auto;
+	height: 30px;
+}
+
+.integration-modal button, .integration-modal input[type='password'] {
+	width: 60%;
 }

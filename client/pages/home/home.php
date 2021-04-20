@@ -126,23 +126,23 @@
 
 	<section class='user-box'>
 		<div class="modal-hld <?php echo $_SESSION['virgin'] ? '' : 'hidden'; ?>">
-			<div class="card modal">
-				<div class="title"> Интеграция: </div>
+			<div class="card modal integration-modal centered">
+				<h2> Е-student Данни </h2>
 				<div>
-					<p> Все още не сте взели данните от вашият student.nbu.bg профил. </p>
-					<p> Моля въведете вашата парола за student.nbu.bg за да продължите.* </p>
+					<p> Тази форма взема данните за вашият график от вашият е-студнет профил. <span class='invalid-feedback phrase-accent'>*</span> </p>
 
 					<form method="post" action="home" method="post">
 						<!-- <label for="eStudentPass"> Моля въведете паролата си за e-student.nbu.bg</label> -->
 						<input name="eStudentPass" type="password" placeholder="Е-Студент парола">
 
-						<br>
+						<p class="invalid-feedback"> <?php echo $scrapeError ?> </p>
+
 						<button class='button offer-button' name='getEstudentData'>
 							Готово
 						</button>
 					</form>
 
-					<p> *Вашата парола няма да бъде запазена никъде. Въпреки това, Ви препоръчваме да смените вашата първоначална парола в student.nbu.bg ако все още не сте, тъй като тя е вашето ЕГН.</p>
+					<p class='invalid-feedback phrase-accent'> *Вашата парола няма да бъде запазена никъде. Въпреки това, ако все още не сте сменили вашата първоначална парола в student.nbu.bg, препоръчваме Ви да го направите, тъй като тя е вашето ЕГН.</p>
 				</div>
 			</div>
 		</div>
