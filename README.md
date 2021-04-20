@@ -1,6 +1,10 @@
-# IDEA:
+# GOAL:
 
 Simple PHP project made as a coursework New Bulgarian University course **INFM114**.
+The idea is to manage the data that is available in e-student.nbu.bg in an eaiser and nicer manner - effectively a manager for the student website.
+
+Please be advice that the project requries an active account in e-student.nbu.bg and it does require a password input once to get the data. The password is not being saved and the project does not take any responsibility. The code is public and transparent.
+
 Don't judge it, I dont usually write in PHP and this is what it is.
 It's on Github mainly for ease of work for me. It's public, because why not :D
 
@@ -21,7 +25,7 @@ It's on Github mainly for ease of work for me. It's public, because why not :D
 11. ~~` Add current week number`~~
 12. ~~` Scrape NBU Calendar and add warnings for upcoming term`~~
 13. Add coursework and test dates
-14. Add "Report bug" feature
+14. - ~~`Add "Report bug" feature`~~
 
 # Random additional ideas (Contributions are welcome)
 - If courseworks feature is added - add a page for each course and add them to the DB

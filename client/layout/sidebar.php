@@ -25,18 +25,22 @@
 		</div>
 	</a>
 		
-	<!--  <a href="home">
+	 <!-- <a href="home">
 		<svg viewBox="0 0 511.441 511.441" fill="currentColor">
 			<path d="M255.721 347.484L90.22 266.751v106.57l165.51 73.503 165.509-73.503V266.742z"></path>
 			<path d="M511.441 189.361L255.721 64.617 0 189.361l255.721 124.744 195.522-95.378v111.032h30V204.092z"></path>
 		</svg>
-	</a>
+	</a> -->
 
-	<a href="home">
+	<a href="https://github.com/Roobyx/INFM114/issues" target="_blank">
 		<svg viewBox="0 0 512 512" fill="currentColor">
 			<path d="M467 76H45a45 45 0 00-45 45v270a45 45 0 0045 45h422a45 45 0 0045-45V121a45 45 0 00-45-45zm-6.3 30L287.8 278a44.7 44.7 0 01-63.6 0L51.3 106h409.4zM30 384.9V127l129.6 129L30 384.9zM51.3 406L181 277.2l22 22c14.2 14.1 33 22 53.1 22 20 0 38.9-7.9 53-22l22-22L460.8 406H51.3zM482 384.9L352.4 256 482 127V385z" />
-			</svg>
-	</a> -->
+		</svg>
+
+		<div>
+			Докладвай проблем
+		</div>
+	</a>
 
 	<!-- <a href="settings">
 		<svg viewBox="0 0 512 512" fill="currentColor">
