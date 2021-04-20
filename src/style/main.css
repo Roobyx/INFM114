@@ -1104,3 +1104,17 @@ thead th {
 .integration-modal button, .integration-modal input[type='password'] {
 	width: 60%;
 }
+
+.github-link {
+	position: fixed;
+	top: 0;
+	right: 0;
+	width: 110px;
+	height: 110px;
+	background-image: url(https://jsemroman.cz/img/github-corner.png);
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center center;
+	z-index: 100;
+	
+}
