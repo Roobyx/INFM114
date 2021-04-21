@@ -25,7 +25,7 @@ It's on Github mainly for ease of work for me. It's public, because why not :D
 11. ~~` Add current week number`~~
 12. ~~` Scrape NBU Calendar and add warnings for upcoming term`~~
 13. Add coursework and test dates
-14. - ~~`Add "Report bug" feature`~~
+14. ~~`Add "Report bug" feature`~~
 
 # Random additional ideas (Contributions are welcome)
 - If courseworks feature is added - add a page for each course and add them to the DB
