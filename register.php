@@ -116,29 +116,24 @@
 		<div class="logo"></div>
 
 		<h2>Регистрация</h2>
-		<!-- <p>Попълнете всички полета.</p> -->
 
 		<div class="form-group">
-			<!-- <label>Факултетен Номер</label> -->
 			<input placeholder='Факултетен Номер*' type="text" name="fNumber" class="form-control <?php echo (!empty($fNumber_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $fNumber; ?>">
 			<span class="invalid-feedback"><?php echo $fNumber_err; ?></span>
 		</div>
 
 		<div class="form-group">
-			<!-- <label>Парола</label> -->
 			<input placeholder='Нова парола*' type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $password; ?>">
 			<span class="invalid-feedback"><?php echo $password_err; ?></span>
 		</div>
 
 		<div class="form-group">
-			<!-- <label>Повторение на паролата</label> -->
 			<input placeholder='Повторение на същата паролата*' type="password" name="confirm_password" class="form-control <?php echo (!empty($confirm_password_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $confirm_password; ?>">
 			<span class="invalid-feedback"><?php echo $confirm_password_err; ?></span>
 		</div>
 
 		<div class="form-group">
 			<input type="submit" class="button login-button" value="Завърши">
-			<!-- <input type="reset" class="button login-button secondary" value="Reset"> -->
 		</div>
 		
 		<p class='register-cta'>

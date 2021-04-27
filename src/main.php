@@ -8,6 +8,7 @@
 	$statusMessage = 'pending';
 	$userHasData = true;
 	global $currentSemester;
+	$fNumber = $_SESSION["fNumber"];
 
 
 	if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION['virgin']) {
@@ -37,7 +38,7 @@
 				'__VIEWSTATE' => $post_viewState,
 				'__VIEWSTATEGENERATOR' => $post_viewStateGenerator,
 				'__EVENTVALIDATION' => $post_eventValidation,
-				'fn' => 'f82365',
+				'fn' => $fNumber,
 				'password' => $tempPass,
 				'btnLogin' => 'Вход'
 			);
@@ -117,7 +118,6 @@
 
 	
 						$courseNote = strip_tags($cell[9]);
-						$fNumber = $_SESSION["fNumber"];
 
 
 						

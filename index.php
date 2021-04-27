@@ -56,7 +56,7 @@
 				require __DIR__ . $pages . 'credentials' . $d . 'logout.php';
 				break;
 
-			case 'change-password':
+			case 'changePassword':
 				include "./client/layout/top_layout.php";
 
 				require __DIR__ . $pages . 'credentials' . $d . 'change-password.php';

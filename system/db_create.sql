@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 19, 2021 at 02:15 PM
+-- Generation Time: Apr 27, 2021 at 08:18 PM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 8.0.3
 
@@ -33,6 +33,9 @@ CREATE TABLE `courses` (
   `teacherName` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- RELATIONSHIPS FOR TABLE `courses`:
+--
 
 -- --------------------------------------------------------
 
@@ -45,6 +48,10 @@ CREATE TABLE `courseworks` (
   `dueDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- RELATIONSHIPS FOR TABLE `courseworks`:
+--
+
 -- --------------------------------------------------------
 
 --
@@ -55,6 +62,10 @@ CREATE TABLE `notes` (
   `id` int(11) NOT NULL,
   `value` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELATIONSHIPS FOR TABLE `notes`:
+--
 
 -- --------------------------------------------------------
 
@@ -74,6 +85,15 @@ CREATE TABLE `student_courses` (
   `noteId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- RELATIONSHIPS FOR TABLE `student_courses`:
+--   `signature`
+--       `courses` -> `signature`
+--   `noteId`
+--       `notes` -> `id`
+--   `fnumber`
+--       `users` -> `fNumber`
+--
 
 -- --------------------------------------------------------
 
@@ -88,6 +108,16 @@ CREATE TABLE `student_courseworks` (
   `noteId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- RELATIONSHIPS FOR TABLE `student_courseworks`:
+--   `courseworkId`
+--       `courseworks` -> `id`
+--   `noteId`
+--       `notes` -> `id`
+--   `fnumber`
+--       `users` -> `fNumber`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -101,6 +131,16 @@ CREATE TABLE `student_tests` (
   `noteId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- RELATIONSHIPS FOR TABLE `student_tests`:
+--   `noteId`
+--       `notes` -> `id`
+--   `testId`
+--       `tests` -> `id`
+--   `student`
+--       `users` -> `fNumber`
+--
+
 -- --------------------------------------------------------
 
 --
@@ -112,6 +152,12 @@ CREATE TABLE `tests` (
   `date` int(11) NOT NULL,
   `course` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELATIONSHIPS FOR TABLE `tests`:
+--   `course`
+--       `courses` -> `signature`
+--
 
 -- --------------------------------------------------------
 
@@ -126,6 +172,10 @@ CREATE TABLE `users` (
   `latestSemester` varchar(40) DEFAULT NULL,
   `created_at` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- RELATIONSHIPS FOR TABLE `users`:
+--
 
 --
 -- Indexes for dumped tables
@@ -211,7 +261,7 @@ ALTER TABLE `notes`
 -- AUTO_INCREMENT for table `student_courses`
 --
 ALTER TABLE `student_courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=648;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=776;
 
 --
 -- AUTO_INCREMENT for table `student_courseworks`
@@ -264,6 +314,35 @@ ALTER TABLE `student_tests`
 --
 ALTER TABLE `tests`
   ADD CONSTRAINT `tests_ibfk_1` FOREIGN KEY (`course`) REFERENCES `courses` (`signature`);
+
+
+--
+-- Metadata
+--
+USE `phpmyadmin`;
+
+--
+-- Dumping data for table `pma__pdf_pages`
+--
+
+INSERT INTO `pma__pdf_pages` (`db_name`, `page_descr`) VALUES
+('infm114', 'INFM114_View');
+
+SET @LAST_PAGE = LAST_INSERT_ID();
+
+--
+-- Dumping data for table `pma__table_coords`
+--
+
+INSERT INTO `pma__table_coords` (`db_name`, `table_name`, `pdf_page_number`, `x`, `y`) VALUES
+('infm114', 'courses', @LAST_PAGE, 1120, 100),
+('infm114', 'courseworks', @LAST_PAGE, 920, 280),
+('infm114', 'notes', @LAST_PAGE, 230, 240),
+('infm114', 'student_courses', @LAST_PAGE, 580, 60),
+('infm114', 'student_courseworks', @LAST_PAGE, 580, 240),
+('infm114', 'student_tests', @LAST_PAGE, 580, 360),
+('infm114', 'tests', @LAST_PAGE, 960, 390),
+('infm114', 'users', @LAST_PAGE, 200, 80);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

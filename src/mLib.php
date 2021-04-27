@@ -1,4 +1,7 @@
 <?php
+	// Simple event link generator for popular calendars
+	// Made by Marian Radev - Github.com/Roobyx
+
 
 	class EventLink {
 		protected $yearNow;

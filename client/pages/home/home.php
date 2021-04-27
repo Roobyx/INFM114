@@ -2,6 +2,8 @@
 	include "./src/main.php";
 ?>
 
+
+
 <section class="user-box second-box">
 		<!-- Show all courses -->
 
@@ -75,7 +77,7 @@
 				<table class="table schedule-table">
 
 					<?php
-						if(isset($_SESSION['schedule'])) {
+						if(isset($_SESSION['schedule']) && $_SESSION['virgin'] === 0) {
 							getSessionSchedule($dbLink, 'courses');
 						} else {
 							setSessionSchedule($dbLink, 'courses');
@@ -109,7 +111,7 @@
 				<table class="table schedule-table">
 
 					<?php
-						if(isset($_SESSION['schedule'])) {
+						if(isset($_SESSION['schedule'])  && $_SESSION['virgin'] === 0) {
 							getSessionSchedule($dbLink, 'courseWorks');
 						} else {
 							setSessionSchedule($dbLink, 'courseWorks');
@@ -125,14 +127,13 @@
 <?php } else { ?>
 
 	<section class='user-box'>
-		<div class="modal-hld <?php echo $_SESSION['virgin'] ? '' : 'hidden'; ?>">
+		<div class="modal-hld">
 			<div class="card modal integration-modal centered">
 				<h2> Е-student Данни </h2>
 				<div>
 					<p> Тази форма взема данните за вашият график от вашият е-студнет профил. <span class='invalid-feedback phrase-accent'>*</span> </p>
 
 					<form method="post" action="home" method="post">
-						<!-- <label for="eStudentPass"> Моля въведете паролата си за e-student.nbu.bg</label> -->
 						<input name="eStudentPass" type="password" placeholder="Е-Студент парола">
 
 						<p class="invalid-feedback"> <?php echo $scrapeError ?> </p>
